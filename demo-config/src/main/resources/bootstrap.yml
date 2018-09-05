@@ -1,0 +1,19 @@
+# server port
+server:
+  port: 9761
+# spring attribute
+spring:
+  application:
+    # application name
+    name: my-config-server
+  # storage jdbc
+  profiles:
+    active: jdbc,prod
+  # config jdbc mysql
+  cloud:
+    config:
+      server:
+        default-label: master
+        # 重写 mysql（避免与key，value 等保留关键字）
+        jdbc:
+          sql: SELECT env_key , env_value FROM properties where env_application=? and env_profile=? and env_label=?

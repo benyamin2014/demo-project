@@ -1,0 +1,6 @@
+turbine:
+  aggregator:
+    cluster-config: default
+  app-config: my-service-provider
+  cluster-name-expression:  "'default'"
+  combine-host-port: true

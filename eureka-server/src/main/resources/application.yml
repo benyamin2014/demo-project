@@ -1,0 +1,55 @@
+# 服务端口
+server:
+  port: 8761
+# http://cloud.spring.io/spring-cloud-static/Finchley.SR1/single/spring-cloud.html#_jdbc_backend
+# eureka 实例主机名称 或 ip
+# Standalone Mode 单机模式
+eureka:
+  instance:
+    # 指定名称
+    #hostname: localhost
+    # 主机ip
+    hostname: ${spring.cloud.client.ip-address}
+    # 使用主机IP
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+#    # 心跳时间，即服务续约间隔时间（缺省为30s）
+#    lease-renewal-interval-in-seconds: 5
+#    # 发呆时间，即服务续约到期时间（缺省为90s）
+#    lease-expiration-duration-in-seconds: 10
+  server:
+    # 关闭自我保护
+    enable-self-preservation: false
+    # 清理间隔（单位毫秒，默认是60*1000）
+    eviction-interval-timer-in-ms: 60000
+  client:
+    register-with-eureka: false
+    #Indicates whether this client should fetch eureka registry information from eureka server.
+    fetch-registry: false
+    # Indicates how often(in seconds) to poll for changes to eureka server information. Eureka servers could be added or removed and this setting controls how soon the eureka clients should know about it.
+    # eureka-service-url-poll-interval-seconds: 30
+    # 集群方式 配置多个zone
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+
+## peer Awareness 通过结合spring.profiles
+#---
+#spring:
+#  profiles: peer1
+#eureka:
+#  instance:
+#    hostname: peer1
+#  client:
+#    serviceUrl:
+#      defaultZone: http://peer2/eureka/
+#
+#---
+#spring:
+#  profiles: peer2
+#eureka:
+#  instance:
+#    hostname: peer2
+#  client:
+#    serviceUrl:
+#      defaultZone: http://peer1/eureka/
+

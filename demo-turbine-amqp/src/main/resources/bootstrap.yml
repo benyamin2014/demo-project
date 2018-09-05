@@ -1,0 +1,25 @@
+# tomcat 端口
+server:
+  port: 7002
+
+# 应用定义
+spring:
+  application:
+    # 应用名称
+    name: my-turbine-server
+  # config 配置
+  cloud:
+    # 开启消息跟踪
+    bus:
+      trace:
+        enabled: true
+    config:
+      discovery:
+        # 开启配置服务发现
+        enabled: true
+        # 配置服务实例名称
+        service-id: my-config-server
+      # 配置文件
+      label: master
+      profile: prod
+

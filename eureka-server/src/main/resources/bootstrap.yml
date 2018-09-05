@@ -1,0 +1,9 @@
+spring:
+  application:
+    # 应用名称
+    name: my-eureka-server
+
+#  cloud:
+#    inetutils:
+#      # 多网卡 选择网段
+#      preferred-networks: 192.168.*.*

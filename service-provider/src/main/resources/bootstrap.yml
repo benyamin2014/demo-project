@@ -1,0 +1,43 @@
+# tomcat 端口
+server:
+  port: 9092
+#  max-connections: 1000
+#  max-threads: 500
+
+# 放开权限
+management:
+  endpoints:
+    web:
+      exposure:
+        include: bus-refresh,hystrix.stream
+
+# 应用定义
+spring:
+  application:
+    # 应用名称
+    name: my-service-provider
+  # config 配置
+  cloud:
+    # 开启消息跟踪
+    bus:
+      trace:
+        enabled: true
+    config:
+      discovery:
+        # 开启配置服务发现
+        enabled: true
+        # 配置服务实例名称
+        service-id: my-config-server
+      # 配置文件
+      label: master
+      profile: prod
+      # uri: http://127.0.0.1:9761/
+
+# eureka client config
+#eureka:
+#  client:
+#    # 默认为30秒 从注册中心拉取服务时间间隔
+#    registry-fetch-interval-seconds: 5
+#    # 集群方式 配置多个zone
+#    serviceUrl:
+#      defaultZone: http://127.0.0.1:8761/eureka/
